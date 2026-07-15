@@ -148,9 +148,10 @@
     .nav { position: sticky; top: 0; z-index: 20; padding: 18px 0;
       transition: background .3s ease, box-shadow .3s ease, backdrop-filter .3s ease; }
     .nav-inner {
+      position: relative;
       width: 100%; max-width: 1120px; margin-inline: auto;
       padding-inline: clamp(22px, 5vw, 60px);
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
     .nav .logo {
       display: block; flex: none; width: 171px; height: 56px;
@@ -158,21 +159,35 @@
       background-repeat: no-repeat; background-size: 217.5px 163px; background-position: -26.6px -54.4px;
     }
     [data-theme="dark"] .nav .logo { background-image: url("brand_assets/brand_newlogo.png"); }
+    .nav-actions { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 28px); }
     .nav-links { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 32px); }
     .nav-links a.nl {
       font-family: var(--sans); font-weight: 400;
-      font-size: 0.86rem; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 0.86rem; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap;
       color: var(--navy); text-decoration: none; opacity: .8;
       transition: opacity .2s ease, color .2s ease;
     }
+    /* hamburger — hidden until the mobile breakpoint */
+    .nav-burger {
+      display: none; flex: none; width: 42px; height: 38px; padding: 9px 8px;
+      background: none; border: 0; cursor: pointer; color: var(--navy);
+    }
+    .nav-burger span { display: block; width: 100%; height: 2px; border-radius: 2px; background: currentColor; transition: transform .3s ease, opacity .2s ease; }
+    .nav-burger span + span { margin-top: 5px; }
+    .nav-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    [data-theme="dark"] .nav-burger { color: #EDE9DE; }
+    .nav:not(.scrolled) .nav-burger { color: var(--cream); }
     .nav-links a.nl:hover { opacity: 1; color: var(--gold-deep); }
+    .nav-links a.nl[aria-current="page"] { opacity: 1; color: var(--gold-deep); }
     .nav.scrolled { background: rgba(248,246,238,0.82); backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--line); }
     [data-theme="dark"] .nav.scrolled { background: rgba(11,26,51,0.82); box-shadow: 0 1px 0 rgba(224,191,128,0.16); }
     [data-theme="dark"] .nav-links a.nl { color: #EDE9DE; }
     /* Over the video hero the nav sits on a dark scrim — white logo + light links in both themes */
     .nav:not(.scrolled) .logo { background-image: url("brand_assets/brand_newlogo.png"); }
     .nav:not(.scrolled) .nl { color: var(--cream); opacity: .9; }
-    .nav:not(.scrolled) .nl:hover { color: var(--gold); }
+    .nav:not(.scrolled) .nl:hover, .nav:not(.scrolled) .nl[aria-current="page"] { color: var(--gold); opacity: 1; }
 
     /* ---------- theme toggle ---------- */
     .theme-toggle { position: relative; display: inline-block; width: 3.5em; height: 2em; font-size: 15px; flex: none; }
@@ -405,24 +420,41 @@
       .work-grid { grid-template-columns: 1fr 1fr; }
       .steps { grid-template-columns: 1fr 1fr; }
     }
+    /* tablet & down: collapse the nav links into a hamburger dropdown */
+    @media (max-width: 768px) {
+      .nav-burger { display: block; }
+      .nav-links {
+        position: absolute; top: calc(100% + 12px); right: 0;
+        flex-direction: column; align-items: stretch; gap: 2px;
+        min-width: 200px; padding: 10px;
+        background: rgba(11,26,51,0.97); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+        border: 1px solid var(--line-gold); border-radius: 14px;
+        box-shadow: 0 24px 48px -22px rgba(0,0,0,0.6);
+        opacity: 0; transform: translateY(-8px) scale(.98); transform-origin: top right;
+        pointer-events: none; transition: opacity .22s ease, transform .22s ease;
+      }
+      .nav-links.open { opacity: 1; transform: none; pointer-events: auto; }
+      .nav-links a.nl { color: var(--cream); opacity: .95; padding: 11px 14px; border-radius: 9px; font-size: 0.9rem; letter-spacing: 0.1em; }
+      .nav-links a.nl:hover, .nav-links a.nl[aria-current="page"] { color: var(--gold); background: rgba(212,176,106,0.10); opacity: 1; }
+    }
     @media (max-width: 600px) {
       .spark { display: none; }
-      /* logo (links home) + toggle only; the footer keeps a back-home link */
-      .nav-links a.nl { display: none; }
 
       /* center the hero text + CTA on mobile */
       .hero-content { max-width: none; text-align: center; }
-      /* stack the eyebrow: Japanese on top, text in the middle, dash below — all centered */
-      .hero-content .eyebrow { flex-direction: column; gap: 8px; }
       .video-hero h1,
       .video-hero .lead { margin-inline: auto; }
       .hero-actions { justify-content: center; }
       /* "See the offerings" sits centered on its own line, like the scroll cue */
       .hero-actions .tlink { width: 100%; justify-content: center; }
 
-      /* section headings: stack the eyebrow (Japanese on top, dash below), left-aligned */
-      .sec-head .eyebrow { flex-direction: column; align-items: flex-start; gap: 8px; }
+      /* stack the Japanese (カルマ) above the label that follows it, everywhere */
+      .eyebrow { flex-direction: column; gap: 8px; }
+      .sec-head .eyebrow { align-items: flex-start; }
 
+      /* buttons shrink to fit small screens */
+      .pill { font-size: 0.78rem; padding: 13px 20px; gap: 10px; max-width: 100%; }
+      .hero-actions .pill { width: 100%; justify-content: center; }
       /* let the long email break so the pill (and its arrow) never gets cut off */
       .cta-card .pill { overflow-wrap: anywhere; }
     }
@@ -440,6 +472,13 @@
       .eyebrow { font-size: 0.72rem; letter-spacing: 0.16em; gap: 8px; }
       .eyebrow::after { width: 20px; }
       .video-hero h1 { font-size: clamp(2.2rem, 9vw, 3rem); }
+    }
+
+    /* very small phones: keep logo + toggle + burger comfortable */
+    @media (max-width: 420px) {
+      .nav-inner { padding-inline: 15px; }
+      .nav .logo { width: 128px; height: 42px; background-size: 162px 122px; background-position: -19.8px -40.6px; }
+      .nav-actions { gap: 10px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -460,14 +499,20 @@
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a class="logo" href="index.html" aria-label="Carma Studio home"></a>
-      <div class="nav-links">
-        <a class="nl" href="index.html">Home</a>
-        <a class="nl" href="#offerings">Offerings</a>
-        <a class="nl" href="#work">Work</a>
+      <div class="nav-actions">
+        <div class="nav-links" id="navLinks">
+          <a class="nl" href="#offerings">Offerings</a>
+          <a class="nl" href="#work">Work</a>
+          <a class="nl" href="#process">Process</a>
+          <a class="nl" href="#contact">Contact</a>
+        </div>
         <label class="theme-toggle" title="Toggle light / dark mode">
           <input type="checkbox" id="themeToggle" role="switch" aria-label="Toggle light and dark mode" />
           <span class="slider"></span>
         </label>
+        <button class="nav-burger" id="navBurger" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </nav>
@@ -688,6 +733,25 @@
     const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Responsive nav — hamburger dropdown on small screens
+    (function () {
+      const burger = document.getElementById('navBurger');
+      const links = document.getElementById('navLinks');
+      if (!burger || !links) return;
+      const setOpen = (open) => {
+        burger.setAttribute('aria-expanded', String(open));
+        burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        links.classList.toggle('open', open);
+      };
+      burger.addEventListener('click', (e) => { e.stopPropagation(); setOpen(burger.getAttribute('aria-expanded') !== 'true'); });
+      links.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+      document.addEventListener('click', (e) => {
+        if (links.classList.contains('open') && !links.contains(e.target) && !burger.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+      window.addEventListener('resize', () => { if (window.innerWidth > 768) setOpen(false); }, { passive: true });
+    })();
 
     // Reveal-on-scroll + connector draw
     const io = new IntersectionObserver((entries) => {
