@@ -382,6 +382,26 @@
       letter-spacing: 0.08em;
     }
 
+    /* ---------- offerings callout ---------- */
+    .offer {
+      background: var(--parchment);
+      border: 1px solid var(--line-gold);
+      border-radius: 28px;
+      padding: clamp(38px, 5vw, 60px);
+      display: grid;
+      grid-template-columns: 1.5fr 0.5fr;
+      gap: clamp(28px, 4vw, 52px);
+      align-items: center;
+    }
+    .offer h2 {
+      font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+      line-height: 1.08;
+      margin-top: 16px;
+    }
+    .offer .body { margin-top: 16px; max-width: 46ch; }
+    .offer-action { justify-self: end; }
+    .offer-action .pill { white-space: nowrap; }
+
     /* ---------- footer ---------- */
     .foot { background: var(--navy-deep); color: var(--cream); position: relative; overflow: hidden; }
     .foot .wrap { padding-top: clamp(64px, 9vh, 96px); padding-bottom: 34px; position: relative; z-index: 2; }
@@ -487,6 +507,7 @@
     [data-theme="dark"] .pullquote { border-left-color: var(--line); }
 
     [data-theme="dark"] .cta-card { background: #10224A; border-color: var(--line); }
+    [data-theme="dark"] .offer { background: #10224A; border-color: var(--line); }
 
     [data-theme="dark"] .foot { background: #081327; }
 
@@ -503,6 +524,8 @@
       .principles { grid-template-columns: 1fr; }
       .steps { grid-template-columns: 1fr 1fr; }
       .foot-grid { grid-template-columns: 1fr; gap: 34px; }
+      .offer { grid-template-columns: 1fr; gap: 24px; }
+      .offer-action { justify-self: start; }
     }
     /* keep the two service pillars side-by-side on tablets; stack only when narrow */
     @media (max-width: 640px) {
@@ -565,6 +588,7 @@
       <div class="nav-links">
         <a class="nl" href="#studio">Studio</a>
         <a class="nl" href="#services">Services</a>
+        <a class="nl" href="offering.html">Offerings</a>
         <a class="nl" href="#process">Process</a>
         <a class="pill" href="#contact">Start a project <span class="arw">&#8599;</span></a>
         <label class="theme-toggle" title="Toggle light / dark mode">
@@ -643,6 +667,22 @@
             <div class="svc"><h3>Workflow &amp; tech setup</h3><p>Practical tools, wired to how your business actually works.</p></div>
             <div class="svc"><h3>Process design</h3><p>Repeatable ways of working, so nothing important slips.</p></div>
             <div class="svc"><h3>Ongoing studio support</h3><p>A steady hand on the details, month after month.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Offerings callout -> offering.html -->
+    <section class="band" id="offerings" style="padding-top:0;">
+      <div class="wrap">
+        <div class="offer reveal">
+          <div class="offer-text">
+            <span class="eyebrow"><span class="jp">カルマ</span> Offerings</span>
+            <h2>A closer look at<br />how I can help</h2>
+            <p class="body">Creative design that makes your brand unmistakable, and dependable admin support that keeps everything running behind the scenes. See the full picture of what Carma Studio offers.</p>
+          </div>
+          <div class="offer-action">
+            <a class="pill" href="offering.html">Explore offerings <span class="arw">&#8599;</span></a>
           </div>
         </div>
       </div>

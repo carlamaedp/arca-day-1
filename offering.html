@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offerings — Carma Studio</title>
+  <meta name="description" content="Carma Studio offerings — premium brand design and the dependable systems behind it, for creative entrepreneurs and growing businesses." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Jost:wght@300;400;500&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet" />
+
+  <script>
+    /* Apply saved / preferred theme before paint to avoid a flash */
+    (function () {
+      try {
+        var saved = localStorage.getItem('carma-theme');
+        var dark = saved ? saved === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    :root {
+      --navy:      #142B52;
+      --navy-deep: #0E1F3D;
+      --gold:      #D4B06A;
+      --gold-deep: #A9843F;
+      --cream:     #F8F6EE;
+      --parchment: #FDFBF4;
+      --ink:       #1E2439;
+      --slate:     #5C6379;
+      --line:      rgba(20,43,82,0.12);
+      --line-gold: rgba(212,176,106,0.42);
+      --cream-70:  rgba(248,246,238,0.72);
+      --cream-45:  rgba(248,246,238,0.45);
+
+      --serif: "Fraunces", Georgia, "Times New Roman", serif;
+      --sans:  "Jost", "Segoe UI", Helvetica, Arial, sans-serif;
+      --jp:    "Noto Serif JP", "Fraunces", serif;
+
+      --star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C13 7 17 11 24 12 17 13 13 17 12 24 11 17 7 13 0 12 7 11 11 7 12 0Z' fill='%23D4B06A'/%3E%3C/svg%3E");
+    }
+
+    :root[data-theme="dark"] {
+      --gold-deep: #E0BF80;                /* brighter gold reads better on navy */
+      --line: rgba(224,191,128,0.16);
+      --line-gold: rgba(224,191,128,0.42);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 106.25%; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--ink);
+      font-size: 1.04rem;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      transition: background .5s ease, color .5s ease;
+    }
+
+    .wrap { width: 100%; max-width: 1120px; margin-inline: auto; padding-inline: clamp(22px, 5vw, 60px); }
+
+    /* ---------- shared type ---------- */
+    .eyebrow {
+      font-family: var(--sans); font-weight: 500;
+      font-size: 0.8rem; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--gold-deep);
+      display: inline-flex; align-items: center; gap: 12px;
+    }
+    .eyebrow .jp {
+      font-family: var(--jp); font-weight: 400; font-size: 0.9rem;
+      letter-spacing: 0.16em; text-transform: none; color: var(--gold-deep);
+      white-space: nowrap;
+    }
+    .eyebrow::after { content: ""; width: 34px; height: 1px; background: var(--line-gold); }
+
+    h1, h2 { font-family: var(--serif); font-weight: 400; color: var(--navy); }
+    h1 em, h2 em { font-style: italic; color: var(--gold-deep); }
+    .lead {
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(1.24rem, 2vw, 1.55rem); line-height: 1.55; color: var(--ink);
+    }
+    p.body { color: var(--slate); }
+
+    /* ---------- pill / links ---------- */
+    .pill {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--navy); color: var(--cream);
+      font-family: var(--sans); font-weight: 500;
+      font-size: 0.82rem; letter-spacing: 0.16em; text-transform: uppercase;
+      text-decoration: none; white-space: nowrap;
+      padding: 15px 26px; border-radius: 40px;
+      transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+    }
+    .pill:hover { background: #1c3a68; transform: translateY(-3px); box-shadow: 0 14px 30px -14px rgba(20,43,82,0.5); }
+    .pill .arw {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(212,176,106,0.25); color: var(--gold);
+      font-family: var(--serif); font-size: 0.9rem;
+    }
+    .pill--gold { background: var(--gold); color: var(--navy); }
+    .pill--gold:hover { background: #c29e52; box-shadow: 0 14px 30px -14px rgba(212,176,106,0.7); }
+    .pill--gold .arw { background: rgba(20,43,82,0.16); color: var(--navy); }
+
+    .tlink {
+      font-family: var(--sans); font-weight: 500;
+      font-size: 0.82rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--navy); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px; position: relative;
+    }
+    .tlink::after {
+      content: ""; position: absolute; left: 0; bottom: -5px;
+      width: 100%; height: 1px; background: currentColor;
+      transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
+    }
+    .tlink:hover::after { transform: scaleX(1); }
+
+    /* ---------- sparkle stars ---------- */
+    .spark {
+      position: absolute; z-index: 2; background-image: var(--star);
+      background-size: contain; background-repeat: no-repeat;
+      pointer-events: none; animation: twinkle 4.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px rgba(212,176,106,0.6));
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: .35; transform: scale(.8) rotate(0deg); }
+      50%      { opacity: 1;   transform: scale(1)  rotate(8deg); }
+    }
+
+    /* ---------- flowing connector ---------- */
+    .connector { display: flex; justify-content: center; padding: 0; margin: -34px 0; }
+    .connector svg { width: 44px; height: 84px; overflow: visible; }
+    .connector path {
+      fill: none; stroke: var(--gold); stroke-width: 1.6; stroke-linecap: round;
+      stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s ease;
+    }
+    .connector.in path { stroke-dashoffset: 0; }
+
+    /* ---------- nav ---------- */
+    .nav { position: sticky; top: 0; z-index: 20; padding: 18px 0;
+      transition: background .3s ease, box-shadow .3s ease, backdrop-filter .3s ease; }
+    .nav-inner {
+      width: 100%; max-width: 1120px; margin-inline: auto;
+      padding-inline: clamp(22px, 5vw, 60px);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav .logo {
+      display: block; flex: none; width: 171px; height: 56px;
+      background-image: url("brand_assets/brand_logo_lightmode.png");
+      background-repeat: no-repeat; background-size: 217.5px 163px; background-position: -26.6px -54.4px;
+    }
+    [data-theme="dark"] .nav .logo { background-image: url("brand_assets/brand_newlogo.png"); }
+    .nav-links { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 32px); }
+    .nav-links a.nl {
+      font-family: var(--sans); font-weight: 400;
+      font-size: 0.86rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--navy); text-decoration: none; opacity: .8;
+      transition: opacity .2s ease, color .2s ease;
+    }
+    .nav-links a.nl:hover { opacity: 1; color: var(--gold-deep); }
+    .nav.scrolled { background: rgba(248,246,238,0.82); backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--line); }
+    [data-theme="dark"] .nav.scrolled { background: rgba(11,26,51,0.82); box-shadow: 0 1px 0 rgba(224,191,128,0.16); }
+    [data-theme="dark"] .nav-links a.nl { color: #EDE9DE; }
+    /* Over the video hero the nav sits on a dark scrim — white logo + light links in both themes */
+    .nav:not(.scrolled) .logo { background-image: url("brand_assets/brand_newlogo.png"); }
+    .nav:not(.scrolled) .nl { color: var(--cream); opacity: .9; }
+    .nav:not(.scrolled) .nl:hover { color: var(--gold); }
+
+    /* ---------- theme toggle ---------- */
+    .theme-toggle { position: relative; display: inline-block; width: 3.5em; height: 2em; font-size: 15px; flex: none; }
+    .theme-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .theme-toggle .slider { position: absolute; inset: 0; cursor: pointer; border-radius: 30px; background: #e5e7eb; transition: background .5s ease; }
+    .theme-toggle .slider::before {
+      content: ""; position: absolute; height: 1.4em; width: 1.4em; border-radius: 50%;
+      left: 10%; bottom: 15%; background: #e5e7eb; box-shadow: inset 8px -4px 0px 0px #fff000;
+      transition: transform .5s ease, box-shadow .5s ease, background .5s ease;
+    }
+    .theme-toggle input:checked + .slider { background: #9ca3af; }
+    .theme-toggle input:checked + .slider::before { transform: translateX(100%); box-shadow: inset 15px -4px 0px 15px #fff000; }
+    .theme-toggle input:focus-visible + .slider { outline: 2px solid var(--gold); outline-offset: 3px; }
+    [data-theme="dark"] .theme-toggle .slider { background: #0a1a44; }
+    [data-theme="dark"] .theme-toggle .slider::before { background: #0a1a44; }
+    [data-theme="dark"] .theme-toggle input:checked + .slider { background: #102b6a; }
+
+    /* ---------- video hero ---------- */
+    .video-hero {
+      position: relative; min-height: 92vh; margin-top: -92px;
+      display: flex; align-items: flex-end;
+      padding: 120px 0 clamp(56px, 10vh, 110px); overflow: hidden; background: #0B1A33;
+    }
+    .video-bg { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .video-hero .scrim {
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(10,20,45,0.60) 0%, rgba(10,20,45,0.26) 34%, rgba(10,20,45,0.80) 100%),
+        linear-gradient(90deg, rgba(10,20,45,0.55) 0%, rgba(10,20,45,0.08) 62%);
+    }
+    [data-theme="dark"] .video-hero .scrim {
+      background:
+        linear-gradient(180deg, rgba(6,14,34,0.72) 0%, rgba(6,14,34,0.42) 34%, rgba(6,14,34,0.88) 100%),
+        linear-gradient(90deg, rgba(6,14,34,0.64) 0%, rgba(6,14,34,0.16) 62%);
+    }
+    /* left-anchored hero content (no longer sharing .wrap's auto-centering) */
+    .hero-content { position: relative; z-index: 3; max-width: 34rem; }
+    .hero-content .eyebrow, .hero-content .eyebrow .jp { color: var(--gold); }
+    .hero-content .eyebrow::after { background: rgba(212,176,106,0.5); }
+    .video-hero h1 {
+      color: var(--cream); font-size: clamp(2.7rem, 7.4vw, 5.6rem);
+      line-height: 1.03; letter-spacing: -0.02em; margin: 22px 0 0; max-width: 15ch;
+      text-shadow: 0 2px 30px rgba(6,14,34,0.45);
+    }
+    .video-hero h1 em { color: var(--gold); text-shadow: 0 0 28px rgba(212,176,106,0.5), 0 2px 30px rgba(6,14,34,0.4); }
+    .video-hero .lead { color: var(--cream-70); max-width: 44ch; margin-top: 22px; text-shadow: 0 1px 20px rgba(6,14,34,0.45); }
+    .hero-actions { margin-top: 36px; display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
+    .hero-actions .tlink { color: var(--cream); }
+
+    /* soft gold aura behind the hero text — ethereal luminance */
+    .hero-glow {
+      position: absolute; z-index: 1; left: 2%; top: 26%;
+      width: min(640px, 74vw); height: 460px; pointer-events: none;
+      background: radial-gradient(closest-side, rgba(212,176,106,0.24), transparent 72%);
+      filter: blur(12px);
+    }
+    /* drifting fireflies */
+    .fireflies { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+    .firefly {
+      position: absolute; width: 5px; height: 5px; border-radius: 50%;
+      background: #F4D79A;
+      box-shadow: 0 0 8px 2px rgba(212,176,106,0.85), 0 0 16px 5px rgba(212,176,106,0.4);
+      opacity: 0;
+      animation: floaty 11s ease-in-out infinite, glowpulse 3.2s ease-in-out infinite;
+    }
+    @keyframes floaty {
+      0%   { transform: translate(0, 0); }
+      25%  { transform: translate(18px, -70px); }
+      50%  { transform: translate(-14px, -150px); }
+      75%  { transform: translate(12px, -230px); }
+      100% { transform: translate(0, -320px); }
+    }
+    @keyframes glowpulse { 0%, 100% { opacity: 0; } 15%, 85% { opacity: .9; } }
+    .scroll-cue {
+      position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3;
+      color: var(--cream-70); font-family: var(--sans); font-size: 0.66rem; letter-spacing: 0.28em;
+      text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+    .scroll-cue span.dot { width: 1px; height: 34px; background: linear-gradient(var(--gold), transparent); animation: cue 2s ease-in-out infinite; }
+    @keyframes cue { 0%,100%{opacity:.3; transform: scaleY(.7);} 50%{opacity:1; transform: scaleY(1);} }
+
+    /* fade-in on load */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+    .fade { opacity: 0; animation: fadeUp .95s cubic-bezier(.2,.7,.2,1) forwards; }
+    .fade.d1 { animation-delay: .15s; }
+    .fade.d2 { animation-delay: .38s; }
+    .fade.d3 { animation-delay: .6s; }
+    .fade.d4 { animation-delay: .82s; }
+
+    /* ---------- section rhythm ---------- */
+    .band { position: relative; padding: clamp(58px, 8vh, 104px) 0; }
+    .band--navy { background: linear-gradient(160deg, var(--navy), var(--navy-deep)); color: var(--cream); overflow: hidden; }
+    .band--navy h2 { color: var(--cream); }
+    .band--navy h2 em { color: var(--gold); }
+    .sec-head { max-width: 640px; }
+    .sec-head h2 { font-size: clamp(2rem, 4.4vw, 3.2rem); line-height: 1.06; margin-top: 18px; }
+    .sec-head .body { margin-top: 18px; font-size: 1.02rem; }
+
+    /* ---------- features ---------- */
+    .features { margin-top: clamp(40px, 6vw, 60px); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 40px); }
+    .feature { border-top: 1px solid var(--navy); padding-top: 20px; }
+    [data-theme="dark"] .feature { border-top-color: rgba(224,191,128,0.4); }
+    .feature .fi { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 1.9rem; color: var(--gold-deep); line-height: 1; }
+    .feature h3 { font-family: var(--serif); font-weight: 400; font-size: 1.45rem; color: var(--navy); margin: 12px 0 8px; line-height: 1.15; }
+    [data-theme="dark"] .feature h3 { color: #F5F1E6; }
+    .feature p { color: var(--slate); font-size: 1rem; line-height: 1.6; }
+    [data-theme="dark"] .feature p { color: #A7AFC6; }
+
+    /* ---------- video callouts ---------- */
+    .callouts { margin-top: clamp(40px, 6vw, 60px); display: grid; grid-template-columns: 1.08fr 0.92fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+    .video-frame {
+      position: relative; border-radius: 22px; overflow: hidden;
+      aspect-ratio: 16 / 11; border: 1px solid rgba(212,176,106,0.4);
+      background: linear-gradient(160deg, #14294f, #0B1A33);
+      box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6), 0 0 44px -6px rgba(212,176,106,0.28);
+    }
+    .video-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .video-frame .chip {
+      position: absolute; z-index: 2;
+      background: rgba(11,26,51,0.68); color: var(--cream);
+      border: 1px solid rgba(212,176,106,0.5); backdrop-filter: blur(6px);
+      padding: 8px 15px; border-radius: 30px;
+      font-family: var(--sans); font-weight: 500; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .video-frame .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .video-frame .chip.tl { top: 16px; left: 16px; }
+    .video-frame .chip.br { bottom: 16px; right: 16px; }
+
+    .moments { display: flex; flex-direction: column; gap: clamp(20px, 3vw, 30px); }
+    .moment { display: flex; gap: 18px; align-items: flex-start; }
+    .moment .mi { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 2rem; color: var(--gold); line-height: 1; flex: none; width: 1.6em; }
+    .moment h3 { font-family: var(--serif); font-weight: 400; font-size: 1.4rem; color: var(--cream); line-height: 1.15; }
+    .moment p { color: var(--cream-70); font-size: 1rem; margin-top: 4px; line-height: 1.6; }
+
+    /* ---------- CTA ---------- */
+    .cta-card {
+      position: relative; background: var(--parchment); border: 1px solid var(--line-gold);
+      border-radius: 28px; padding: clamp(48px, 7vw, 88px) clamp(30px, 6vw, 76px);
+      text-align: center; overflow: hidden;
+      box-shadow: 0 0 60px -22px rgba(212,176,106,0.32);
+    }
+    [data-theme="dark"] .cta-card { background: #10224A; border-color: var(--line); }
+    .cta-card::before { content: ""; position: absolute; inset: 0; z-index: 0; background: radial-gradient(60% 90% at 50% 0%, rgba(212,176,106,0.16), transparent 70%); }
+    .cta-card > * { position: relative; z-index: 2; }
+    .cta-card .eyebrow { justify-content: center; }
+    .cta-card h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(2.1rem, 5vw, 3.6rem); line-height: 1.08; margin: 22px auto 0; max-width: 18ch; }
+    [data-theme="dark"] .cta-card h2 { color: #F5F1E6; }
+    .cta-card .body { margin: 20px auto 0; max-width: 46ch; color: var(--slate); }
+    [data-theme="dark"] .cta-card .body { color: #A7AFC6; }
+    .cta-card .pill { margin-top: 34px; max-width: 100%; white-space: normal; overflow-wrap: break-word; text-align: center; letter-spacing: 0.08em; }
+
+    /* ---------- footer ---------- */
+    .foot { background: var(--navy-deep); color: var(--cream); position: relative; overflow: hidden; }
+    [data-theme="dark"] .foot { background: #081327; }
+    .foot .wrap { padding-top: clamp(64px, 9vh, 96px); padding-bottom: 34px; position: relative; z-index: 2; }
+    .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 44px; align-items: start; }
+    .foot-mark { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 2rem; color: var(--cream); letter-spacing: .01em; }
+    .foot-jp { font-family: var(--jp); font-size: 0.95rem; letter-spacing: .18em; color: var(--gold); margin-top: 4px; }
+    .foot-tag { color: var(--cream-70); font-style: italic; font-family: var(--serif); margin-top: 16px; max-width: 34ch; }
+    .foot-col h4 { font-family: var(--sans); font-weight: 500; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    .foot-col a, .foot-col span { display: block; color: var(--cream-70); text-decoration: none; font-size: 1.02rem; margin-bottom: 11px; transition: color .2s ease; }
+    .foot-col a:hover { color: var(--gold); }
+    .foot-copy {
+      margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(212,176,106,0.24);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      color: var(--cream-45); font-size: 0.86rem; letter-spacing: 0.04em;
+    }
+    .foot-copy a { color: var(--cream-45); text-decoration: none; }
+    .foot-copy a:hover { color: var(--gold); }
+
+    /* ---------- dark theme core ---------- */
+    [data-theme="dark"] body { background: #0B1A33; color: #E9E5DA; }
+    [data-theme="dark"] h1,
+    [data-theme="dark"] h2,
+    [data-theme="dark"] .foot-mark { color: #F5F1E6; }
+    [data-theme="dark"] .lead { color: #EDE9DE; }
+    [data-theme="dark"] p.body,
+    [data-theme="dark"] .sec-head .body { color: #A7AFC6; }
+    [data-theme="dark"] .band--navy {
+      background: linear-gradient(160deg, #15294F, #0E2145);
+      border-block: 1px solid var(--line);
+    }
+    /* keep the hero headline light even with the global dark h1 override */
+    [data-theme="dark"] .video-hero h1 { color: var(--cream); }
+
+    /* ---------- reveal-on-scroll ---------- */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s ease, transform .9s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 900px) {
+      .features { grid-template-columns: 1fr 1fr; }
+      .callouts { grid-template-columns: 1fr; gap: 32px; }
+      .foot-grid { grid-template-columns: 1fr; gap: 34px; }
+    }
+    @media (max-width: 600px) {
+      .spark { display: none; }
+      /* logo (links home) + toggle only; the footer keeps a back-home link */
+      .nav-links a.nl { display: none; }
+
+      /* center the hero text + CTA on mobile */
+      .hero-content { max-width: none; text-align: center; }
+      /* stack the eyebrow: Japanese on top, text in the middle, dash below — all centered */
+      .hero-content .eyebrow { flex-direction: column; gap: 8px; }
+      .video-hero h1,
+      .video-hero .lead { margin-inline: auto; }
+      .hero-actions { justify-content: center; }
+      /* "See the offerings" sits centered on its own line, like the scroll cue */
+      .hero-actions .tlink { width: 100%; justify-content: center; }
+
+      /* section headings: stack the eyebrow (Japanese on top, dash below), left-aligned */
+      .sec-head .eyebrow { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+      /* let the long email break so the pill (and its arrow) never gets cut off */
+      .cta-card .pill { overflow-wrap: anywhere; }
+    }
+    @media (max-width: 560px) {
+      .features { grid-template-columns: 1fr; }
+      .foot-copy { flex-direction: column; }
+    }
+    @media (max-width: 520px) {
+      .nav { padding: 12px 0; }
+      .nav .logo { width: 147px; height: 48px; background-size: 186px 140px; background-position: -22.8px -46.6px; }
+      .theme-toggle { font-size: 13px; }
+      .video-hero { min-height: 86vh; }
+      .eyebrow { font-size: 0.72rem; letter-spacing: 0.16em; gap: 8px; }
+      .eyebrow::after { width: 20px; }
+      .video-hero h1 { font-size: clamp(2.2rem, 9vw, 3rem); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .video-bg { display: none; }
+      .spark, .scroll-cue span.dot { animation: none; }
+      .firefly { animation: none; opacity: .55; }
+      .fade { opacity: 1; animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .connector path { transition: none; stroke-dashoffset: 0; }
+      .theme-toggle .slider, .theme-toggle .slider::before { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html" aria-label="Carma Studio home"></a>
+      <div class="nav-links">
+        <a class="nl" href="index.html">Home</a>
+        <a class="nl" href="#offerings">Offerings</a>
+        <label class="theme-toggle" title="Toggle light / dark mode">
+          <input type="checkbox" id="themeToggle" role="switch" aria-label="Toggle light and dark mode" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Video hero -->
+  <header class="video-hero">
+    <video class="video-bg" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <source src="video_background.mp4" type="video/mp4" />
+    </video>
+    <div class="scrim"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="fireflies" aria-hidden="true">
+      <span class="firefly" style="left:12%;bottom:8%;animation-delay:0s;animation-duration:11s;"></span>
+      <span class="firefly" style="left:22%;bottom:20%;animation-delay:2.4s;animation-duration:9s;"></span>
+      <span class="firefly" style="left:38%;bottom:5%;animation-delay:4.1s;animation-duration:12s;"></span>
+      <span class="firefly" style="left:54%;bottom:16%;animation-delay:1.2s;animation-duration:10s;"></span>
+      <span class="firefly" style="left:68%;bottom:10%;animation-delay:3.3s;animation-duration:13s;"></span>
+      <span class="firefly" style="left:80%;bottom:24%;animation-delay:5.2s;animation-duration:9.5s;"></span>
+      <span class="firefly" style="left:88%;bottom:6%;animation-delay:2s;animation-duration:11.5s;"></span>
+      <span class="firefly" style="left:46%;bottom:28%;animation-delay:6s;animation-duration:10.5s;"></span>
+    </div>
+    <div class="wrap">
+      <div class="hero-content">
+        <span class="eyebrow fade d1"><span class="jp">カルマ</span> Carma Studio · Offerings</span>
+        <h1 class="fade d2">Beautifully designed,<br /><em>dependably run.</em></h1>
+        <p class="lead fade d3">Premium brand design and the steady systems behind it — everything Carma Studio offers, made with intention.</p>
+        <div class="hero-actions fade d4">
+          <a class="pill pill--gold" href="mailto:hello@carmastudio.com">Start a project <span class="arw">&#8599;</span></a>
+          <a class="tlink" href="#offerings">See the offerings &#8595;</a>
+        </div>
+      </div>
+    </div>
+    <a class="scroll-cue" href="#offerings" aria-label="Scroll to offerings">
+      Scroll <span class="dot"></span>
+    </a>
+  </header>
+
+  <!-- Features / offerings -->
+  <section class="band" id="offerings">
+    <span class="spark" style="width:16px;height:16px;top:12%;right:10%;animation-delay:.6s;"></span>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="jp">カルマ</span> What I Offer</span>
+        <h2>Two crafts,<br />held to one standard</h2>
+        <p class="body">Whether you need something beautiful to show the world or something dependable to run behind it, the level of care stays the same.</p>
+      </div>
+      <div class="features">
+        <div class="feature reveal"><div class="fi">01</div><h3>Brand identity &amp; strategy</h3><p>A considered visual language that makes your business unmistakably itself.</p></div>
+        <div class="feature reveal"><div class="fi">02</div><h3>Web &amp; digital design</h3><p>Premium sites and layouts that feel considered and read effortlessly.</p></div>
+        <div class="feature reveal"><div class="fi">03</div><h3>Social &amp; marketing systems</h3><p>Templates and toolkits that keep every touchpoint on brand.</p></div>
+        <div class="feature reveal"><div class="fi">04</div><h3>Admin &amp; operations</h3><p>The behind-the-scenes structure that keeps the day-to-day calm.</p></div>
+        <div class="feature reveal"><div class="fi">05</div><h3>Workflow, tech &amp; ongoing support</h3><p>Practical tools wired to how you work — and a steady hand on the details after launch.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="connector" data-connector><svg viewBox="0 0 44 84" aria-hidden="true"><path pathLength="1" d="M22 2 C 6 22, 38 42, 22 62 C 14 74, 22 78, 22 82" /></svg></div></div>
+
+  <!-- Video callouts -->
+  <section class="band band--navy" id="in-motion">
+    <span class="spark" style="width:18px;height:18px;top:14%;left:8%;animation-delay:.4s;"></span>
+    <span class="spark" style="width:13px;height:13px;bottom:16%;right:9%;animation-delay:1.6s;"></span>
+    <div class="fireflies" aria-hidden="true">
+      <span class="firefly" style="left:16%;bottom:10%;animation-delay:1s;animation-duration:12s;"></span>
+      <span class="firefly" style="left:72%;bottom:14%;animation-delay:3.5s;animation-duration:10s;"></span>
+      <span class="firefly" style="left:90%;bottom:8%;animation-delay:5s;animation-duration:13s;"></span>
+    </div>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="jp">カルマ</span> The Work, In Motion</span>
+        <h2>Moments from<br />the studio</h2>
+      </div>
+      <div class="callouts">
+        <div class="video-frame reveal">
+          <video autoplay muted loop playsinline preload="auto" aria-hidden="true">
+            <source src="video_background.mp4" type="video/mp4" />
+          </video>
+          <span class="chip tl">Designing</span>
+          <span class="chip br">Organising</span>
+        </div>
+        <div class="moments">
+          <div class="moment reveal"><div class="mi">01</div><div><h3>The idea takes shape</h3><p>Every project starts with intention — the why before the what, sketched out with care.</p></div></div>
+          <div class="moment reveal"><div class="mi">02</div><div><h3>Craft meets structure</h3><p>Design and systems come together, each built with the same attention to detail.</p></div></div>
+          <div class="moment reveal"><div class="mi">03</div><div><h3>Everything runs quietly</h3><p>The result: work that looks the part and keeps running — so you don't have to think about it.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="band" id="contact">
+    <div class="wrap">
+      <div class="cta-card reveal">
+        <span class="spark" style="width:20px;height:20px;top:18%;left:14%;animation-delay:.5s;"></span>
+        <span class="spark" style="width:15px;height:15px;bottom:22%;right:16%;animation-delay:1.6s;"></span>
+        <span class="eyebrow">Let's Begin</span>
+        <h2>Let's make something<br />that <em>comes back to you.</em></h2>
+        <p class="body">Tell us what you're building. We'll bring the intention, the craft, and the care.</p>
+        <a class="pill pill--gold" href="mailto:hello@carmastudio.com">hello@carmastudio.com <span class="arw">&#8599;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="foot">
+    <span class="spark" style="width:14px;height:14px;top:24%;right:10%;animation-delay:1.2s;"></span>
+    <span class="spark" style="width:18px;height:18px;bottom:30%;left:8%;animation-delay:2.4s;"></span>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <div class="foot-mark">carma studio</div>
+          <div class="foot-jp">カルマ</div>
+          <p class="foot-tag">Intentional design &amp; operations for work that naturally comes back to you.</p>
+        </div>
+        <div class="foot-col">
+          <h4>Contact</h4>
+          <a href="mailto:hello@carmastudio.com">hello@carmastudio.com</a>
+          <span>Available worldwide</span>
+        </div>
+        <div class="foot-col">
+          <h4>Connect</h4>
+          <a href="https://instagram.com/carmastudio" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.linkedin.com/company/carmastudio" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.behance.net/carmastudio" target="_blank" rel="noopener">Behance</a>
+        </div>
+      </div>
+      <div class="foot-copy">
+        <span>&copy; 2026 Carma Studio. All rights reserved.</span>
+        <a href="index.html">&#8592; Back to home</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle — checked = light (sun), unchecked = dark (moon)
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    function applyTheme(theme) {
+      if (theme === 'dark') root.setAttribute('data-theme', 'dark');
+      else root.removeAttribute('data-theme');
+      toggle.checked = theme === 'light';
+    }
+    (function initTheme() {
+      let saved = null;
+      try { saved = localStorage.getItem('carma-theme'); } catch (e) {}
+      const initial = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      applyTheme(initial);
+    })();
+    toggle.addEventListener('change', () => {
+      const theme = toggle.checked ? 'light' : 'dark';
+      try { localStorage.setItem('carma-theme', theme); } catch (e) {}
+      applyTheme(theme);
+    });
+
+    // Nav background on scroll
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Reveal-on-scroll + connector draw
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal, [data-connector]').forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
