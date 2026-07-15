@@ -332,16 +332,20 @@
 
     /* ---------- selected work gallery ---------- */
     .work-grid { margin-top: clamp(40px, 6vw, 60px); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(22px, 3vw, 36px); }
-    .work-card { display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; background: var(--parchment); border: 1px solid var(--line); box-shadow: 0 24px 50px -34px rgba(20,43,82,0.45); transition: transform .3s ease, box-shadow .3s ease; }
+    .work-card { display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; background: var(--parchment); border: 1px solid var(--line); box-shadow: 0 24px 50px -34px rgba(20,43,82,0.45); transition: transform .3s ease, box-shadow .3s ease; text-decoration: none; color: inherit; }
     [data-theme="dark"] .work-card { background: #10224A; }
     .work-card:hover { transform: translateY(-5px); box-shadow: 0 34px 62px -30px rgba(20,43,82,0.5), 0 0 40px -12px rgba(212,176,106,0.3); }
     .work-img { aspect-ratio: 3 / 2; overflow: hidden; }
-    .work-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .work-card figcaption { padding: 15px 18px 18px; }
+    .work-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+    .work-card:hover .work-img img { transform: scale(1.04); }
+    .work-card .work-cap-wrap { padding: 15px 18px 18px; }
     .work-tag { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.14rem; color: var(--navy); line-height: 1.2; }
     [data-theme="dark"] .work-tag { color: #F5F1E6; }
     .work-cap { display: block; margin-top: 5px; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.03em; color: var(--slate); }
     [data-theme="dark"] .work-cap { color: #A7AFC6; }
+    .work-more { display: inline-block; margin-top: 12px; font-family: var(--sans); font-weight: 500; font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); opacity: 0; transform: translateX(-4px); transition: opacity .3s ease, transform .3s ease; }
+    .work-card:hover .work-more, .work-card:focus-visible .work-more { opacity: 1; transform: none; }
+    .work-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
     /* ---------- process ---------- */
     .process-art { margin: clamp(30px, 5vw, 46px) auto 0; max-width: 900px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line-gold); box-shadow: 0 30px 60px -34px rgba(0,0,0,0.5); }
@@ -501,10 +505,10 @@
       <a class="logo" href="index.html" aria-label="Carma Studio home"></a>
       <div class="nav-actions">
         <div class="nav-links" id="navLinks">
-          <a class="nl" href="#offerings">Offerings</a>
-          <a class="nl" href="#work">Work</a>
-          <a class="nl" href="#process">Process</a>
-          <a class="nl" href="#contact">Contact</a>
+          <a class="nl" href="offering.html" aria-current="page">Offerings</a>
+          <a class="nl" href="work.html">Work</a>
+          <a class="nl" href="animation.html">In Motion</a>
+          <a class="nl" href="journal.html">Journal</a>
         </div>
         <label class="theme-toggle" title="Toggle light / dark mode">
           <input type="checkbox" id="themeToggle" role="switch" aria-label="Toggle light and dark mode" />
@@ -586,26 +590,26 @@
         <p class="body">Representative pieces across the studio's crafts — from the first impression a brand makes to the quiet systems that keep it running.</p>
       </div>
       <div class="work-grid">
-        <figure class="work-card reveal">
+        <a class="work-card reveal" href="work.html">
           <div class="work-img"><img src="images/work-brand-identity.png" alt="Flat lay of a premium brand identity kit on cream — navy business cards and folded stationery with a gold-foil botanical mark, a wax seal, and a navy-gold-cream colour swatch." /></div>
-          <figcaption><span class="work-tag">Brand identity &amp; strategy</span><span class="work-cap">Stationery &amp; gold-foil identity system</span></figcaption>
-        </figure>
-        <figure class="work-card reveal">
+          <div class="work-cap-wrap"><span class="work-tag">Brand identity &amp; strategy</span><span class="work-cap">Stationery &amp; gold-foil identity system</span><span class="work-more">View the work &#8594;</span></div>
+        </a>
+        <a class="work-card reveal" href="work.html">
           <div class="work-img"><img src="images/work-web-design.png" alt="A minimal navy-and-gold editorial website layout shown on a laptop and phone standing on a cream desk." /></div>
-          <figcaption><span class="work-tag">Web &amp; digital design</span><span class="work-cap">Responsive editorial site design</span></figcaption>
-        </figure>
-        <figure class="work-card reveal">
+          <div class="work-cap-wrap"><span class="work-tag">Web &amp; digital design</span><span class="work-cap">Responsive editorial site design</span><span class="work-more">View the work &#8594;</span></div>
+        </a>
+        <a class="work-card reveal" href="work.html">
           <div class="work-img"><img src="images/work-social-systems.png" alt="A cohesive set of social-media template tiles fanned out on cream, unified by a navy, gold and cream visual system." /></div>
-          <figcaption><span class="work-tag">Social &amp; marketing systems</span><span class="work-cap">On-brand social template toolkit</span></figcaption>
-        </figure>
-        <figure class="work-card reveal">
+          <div class="work-cap-wrap"><span class="work-tag">Social &amp; marketing systems</span><span class="work-cap">On-brand social template toolkit</span><span class="work-more">View the work &#8594;</span></div>
+        </a>
+        <a class="work-card reveal" href="work.html">
           <div class="work-img"><img src="images/work-admin-ops.png" alt="A calm, organised desk: a laptop showing a clean dashboard, navy binders with gold labels, a planner, and a cup of tea — the operations behind the work." /></div>
-          <figcaption><span class="work-tag">Admin &amp; operations</span><span class="work-cap">Organised back-office systems</span></figcaption>
-        </figure>
-        <figure class="work-card reveal">
+          <div class="work-cap-wrap"><span class="work-tag">Admin &amp; operations</span><span class="work-cap">Organised back-office systems</span><span class="work-more">View the work &#8594;</span></div>
+        </a>
+        <a class="work-card reveal" href="work.html">
           <div class="work-img"><img src="images/work-workflow-tech.png" alt="A refined tech setup on a cream desk — a laptop showing a clean project dashboard beside a phone with subtle notifications and navy-and-gold accents." /></div>
-          <figcaption><span class="work-tag">Workflow, tech &amp; support</span><span class="work-cap">Dashboards &amp; ongoing support tooling</span></figcaption>
-        </figure>
+          <div class="work-cap-wrap"><span class="work-tag">Workflow, tech &amp; support</span><span class="work-cap">Dashboards &amp; ongoing support tooling</span><span class="work-more">View the work &#8594;</span></div>
+        </a>
       </div>
     </div>
   </section>

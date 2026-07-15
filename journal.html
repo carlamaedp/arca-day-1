@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journal — Carma Studio</title>
+  <meta name="description" content="Notes from Carma Studio on intention, craft, systems, and the belief that good work has a way of coming back." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Jost:wght@300;400;500&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet" />
+
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('carma-theme');
+        var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    :root {
+      --navy:#142B52; --navy-deep:#0E1F3D; --gold:#D4B06A; --gold-deep:#A9843F;
+      --cream:#F8F6EE; --parchment:#FDFBF4; --ink:#1E2439; --slate:#5C6379;
+      --line:rgba(20,43,82,0.12); --line-gold:rgba(212,176,106,0.42);
+      --cream-70:rgba(248,246,238,0.72); --cream-45:rgba(248,246,238,0.45);
+      --serif:"Fraunces",Georgia,"Times New Roman",serif;
+      --sans:"Jost","Segoe UI",Helvetica,Arial,sans-serif;
+      --jp:"Noto Serif JP","Fraunces",serif;
+      --star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C13 7 17 11 24 12 17 13 13 17 12 24 11 17 7 13 0 12 7 11 11 7 12 0Z' fill='%23D4B06A'/%3E%3C/svg%3E");
+    }
+    :root[data-theme="dark"] { --gold-deep:#E0BF80; --line:rgba(224,191,128,0.16); --line-gold:rgba(224,191,128,0.42); }
+
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; font-size:106.25%; }
+    body { font-family:var(--sans); background:var(--cream); color:var(--ink); font-size:1.04rem; line-height:1.75;
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:hidden; transition:background .5s ease,color .5s ease; }
+    [data-theme="dark"] body { background:#0B1A33; color:#E9E5DA; }
+
+    .atmos { position:fixed; inset:0; z-index:0; pointer-events:none;
+      background:
+        radial-gradient(46vw 40vw at 78% -6%, rgba(212,176,106,0.18), transparent 60%),
+        radial-gradient(52vw 44vw at 6% 8%, rgba(20,43,82,0.06), transparent 62%),
+        radial-gradient(60vw 50vw at 50% 118%, rgba(212,176,106,0.10), transparent 60%); }
+    .shell { position:relative; z-index:1; }
+    .wrap { width:100%; max-width:1120px; margin-inline:auto; padding-inline:clamp(22px,5vw,60px); }
+
+    .eyebrow { font-family:var(--sans); font-weight:500; font-size:0.8rem; letter-spacing:0.32em; text-transform:uppercase;
+      color:var(--gold-deep); display:inline-flex; align-items:center; gap:12px; }
+    .eyebrow .jp { font-family:var(--jp); font-weight:400; font-size:0.9rem; letter-spacing:0.16em; text-transform:none; color:var(--gold-deep); white-space:nowrap; }
+    .eyebrow::after { content:""; width:34px; height:1px; background:var(--line-gold); }
+
+    h1,h2 { font-family:var(--serif); font-weight:400; color:var(--navy); }
+    h1 em,h2 em { font-style:italic; color:var(--gold-deep); }
+    [data-theme="dark"] h1,[data-theme="dark"] h2 { color:#F5F1E6; }
+    .lead { font-family:var(--serif); font-weight:300; font-size:clamp(1.24rem,2vw,1.55rem); line-height:1.55; color:var(--ink); }
+    [data-theme="dark"] .lead { color:#EDE9DE; }
+    p.body { color:var(--slate); }
+    [data-theme="dark"] p.body { color:#A7AFC6; }
+
+    .pill { display:inline-flex; align-items:center; gap:12px; background:var(--navy); color:var(--cream);
+      font-family:var(--sans); font-weight:500; font-size:0.82rem; letter-spacing:0.16em; text-transform:uppercase;
+      text-decoration:none; white-space:nowrap; padding:15px 26px; border-radius:40px;
+      transition:transform .25s ease, background .25s ease, box-shadow .25s ease; }
+    .pill:hover { background:#1c3a68; transform:translateY(-3px); box-shadow:0 14px 30px -14px rgba(20,43,82,0.5); }
+    .pill .arw { display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%;
+      background:rgba(212,176,106,0.25); color:var(--gold); font-family:var(--serif); font-size:0.9rem; }
+    .pill--gold { background:var(--gold); color:var(--navy); }
+    .pill--gold:hover { background:#c29e52; box-shadow:0 14px 30px -14px rgba(212,176,106,0.7); }
+    .pill--gold .arw { background:rgba(20,43,82,0.16); color:var(--navy); }
+    [data-theme="dark"] .pill:not(.pill--gold) { background:#21406F; color:#F5F1E6; }
+    [data-theme="dark"] .pill:not(.pill--gold):hover { background:#2A4E82; }
+
+    .spark { position:absolute; z-index:2; background-image:var(--star); background-size:contain; background-repeat:no-repeat;
+      pointer-events:none; animation:twinkle 4.5s ease-in-out infinite; filter:drop-shadow(0 0 6px rgba(212,176,106,0.5)); }
+    @keyframes twinkle { 0%,100%{opacity:.35; transform:scale(.8) rotate(0deg);} 50%{opacity:1; transform:scale(1) rotate(8deg);} }
+
+    /* ---------- nav ---------- */
+    .nav { position:sticky; top:0; z-index:20; padding:18px 0; transition:background .3s ease, box-shadow .3s ease, backdrop-filter .3s ease; }
+    .nav-inner { position:relative; width:100%; max-width:1120px; margin-inline:auto; padding-inline:clamp(22px,5vw,60px);
+      display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .nav .logo { display:block; flex:none; width:171px; height:56px;
+      background-image:url("brand_assets/brand_logo_lightmode.png"); background-repeat:no-repeat;
+      background-size:217.5px 163px; background-position:-26.6px -54.4px; }
+    [data-theme="dark"] .nav .logo { background-image:url("brand_assets/brand_newlogo.png"); }
+    .nav-actions { display:flex; align-items:center; gap:clamp(16px,2.4vw,28px); }
+    .nav-links { display:flex; align-items:center; gap:clamp(18px,2.4vw,32px); }
+    .nav-links a.nl { font-family:var(--sans); font-weight:400; font-size:0.86rem; letter-spacing:0.12em; text-transform:uppercase;
+      white-space:nowrap; color:var(--navy); text-decoration:none; opacity:.8; transition:opacity .2s ease, color .2s ease; }
+    .nav-links a.nl:hover { opacity:1; color:var(--gold-deep); }
+    .nav-links a.nl[aria-current="page"] { opacity:1; color:var(--gold-deep); }
+    .nav.scrolled { background:rgba(248,246,238,0.82); backdrop-filter:blur(10px); box-shadow:0 1px 0 var(--line); }
+    [data-theme="dark"] .nav.scrolled { background:rgba(11,26,51,0.82); box-shadow:0 1px 0 rgba(224,191,128,0.16); }
+    [data-theme="dark"] .nav-links a.nl { color:#EDE9DE; }
+    .nav-burger { display:none; flex:none; width:42px; height:38px; padding:9px 8px; background:none; border:0; cursor:pointer; color:var(--navy); }
+    .nav-burger span { display:block; width:100%; height:2px; border-radius:2px; background:currentColor; transition:transform .3s ease, opacity .2s ease; }
+    .nav-burger span + span { margin-top:5px; }
+    .nav-burger[aria-expanded="true"] span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .nav-burger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+    .nav-burger[aria-expanded="true"] span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    [data-theme="dark"] .nav-burger { color:#EDE9DE; }
+
+    /* ---------- theme toggle ---------- */
+    .theme-toggle { position:relative; display:inline-block; width:3.5em; height:2em; font-size:15px; flex:none; }
+    .theme-toggle input { position:absolute; opacity:0; width:0; height:0; }
+    .theme-toggle .slider { position:absolute; inset:0; cursor:pointer; border-radius:30px; background:#e5e7eb; transition:background .5s ease; }
+    .theme-toggle .slider::before { content:""; position:absolute; height:1.4em; width:1.4em; border-radius:50%; left:10%; bottom:15%;
+      background:#e5e7eb; box-shadow:inset 8px -4px 0px 0px #fff000; transition:transform .5s ease, box-shadow .5s ease, background .5s ease; }
+    .theme-toggle input:checked + .slider { background:#9ca3af; }
+    .theme-toggle input:checked + .slider::before { transform:translateX(100%); box-shadow:inset 15px -4px 0px 15px #fff000; }
+    .theme-toggle input:focus-visible + .slider { outline:2px solid var(--gold-deep); outline-offset:3px; }
+    [data-theme="dark"] .theme-toggle .slider { background:#0a1a44; }
+    [data-theme="dark"] .theme-toggle .slider::before { background:#0a1a44; }
+    [data-theme="dark"] .theme-toggle input:checked + .slider { background:#102b6a; }
+
+    /* ---------- hero ---------- */
+    .hero { position:relative; text-align:center; padding:clamp(70px,13vh,140px) 0 clamp(46px,7vh,84px); }
+    .hero .halo { position:absolute; top:2%; left:50%; transform:translateX(-50%); width:min(680px,86vw); height:400px; z-index:0;
+      background:radial-gradient(closest-side, rgba(212,176,106,0.22), transparent 72%); filter:blur(6px); }
+    .hero-inner { position:relative; z-index:2; }
+    .hero .eyebrow { justify-content:center; }
+    .hero h1 { font-size:clamp(2.1rem,7.4vw,5rem); line-height:1.03; letter-spacing:-0.02em; margin:24px auto 0; max-width:16ch; overflow-wrap:break-word; }
+    .hero .lead { margin:26px auto 0; max-width:52ch; }
+    .ribbon { margin:40px auto 0; width:min(240px,60vw); display:block; }
+    .ribbon path { fill:none; stroke:var(--gold); stroke-width:1.4; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; animation:draw 2.4s ease .3s forwards; }
+    @keyframes draw { to { stroke-dashoffset:0; } }
+
+    /* ---------- sections ---------- */
+    .band { position:relative; padding:clamp(46px,7vh,88px) 0; }
+    .sec-head { max-width:660px; }
+    .sec-head h2 { font-size:clamp(2rem,4.4vw,3.1rem); line-height:1.06; margin-top:18px; }
+    .sec-head .body { margin-top:18px; }
+
+    /* ---------- journal notes (complete reflections, not teasers) ---------- */
+    .notes { margin-top:clamp(38px,5vw,56px); }
+    .note { display:grid; grid-template-columns:0.42fr 1.58fr; gap:clamp(16px,4vw,48px);
+      padding:clamp(26px,4vw,40px) 0; border-top:1px solid var(--line-gold); }
+    .note:last-child { border-bottom:1px solid var(--line-gold); }
+    .note-kicker { font-family:var(--sans); font-weight:500; font-size:0.74rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold-deep); }
+    .note-num { display:block; font-family:var(--serif); font-style:italic; font-weight:300; font-size:1.6rem; color:var(--gold-deep); margin-top:10px; }
+    .note h3 { font-family:var(--serif); font-weight:400; font-size:clamp(1.4rem,2.8vw,2rem); color:var(--navy); line-height:1.18; }
+    [data-theme="dark"] .note h3 { color:#F5F1E6; }
+    .note p { color:var(--slate); margin-top:12px; line-height:1.75; max-width:62ch; }
+    [data-theme="dark"] .note p { color:#A7AFC6; }
+
+    /* ---------- CTA ---------- */
+    .cta-card { position:relative; background:var(--parchment); border:1px solid var(--line-gold); border-radius:28px;
+      padding:clamp(48px,7vw,84px) clamp(30px,6vw,72px); text-align:center; overflow:hidden; box-shadow:0 0 60px -22px rgba(212,176,106,0.30); }
+    [data-theme="dark"] .cta-card { background:#10224A; border-color:var(--line); }
+    .cta-card::before { content:""; position:absolute; inset:0; z-index:0; background:radial-gradient(60% 90% at 50% 0%, rgba(212,176,106,0.16), transparent 70%); }
+    .cta-card > * { position:relative; z-index:2; }
+    .cta-card .eyebrow { justify-content:center; }
+    .cta-card h2 { font-family:var(--serif); font-weight:300; font-size:clamp(2rem,5vw,3.4rem); line-height:1.08; margin:22px auto 0; max-width:20ch; }
+    .cta-card .body { margin:20px auto 0; max-width:46ch; color:var(--slate); }
+    [data-theme="dark"] .cta-card .body { color:#A7AFC6; }
+    .cta-card .pill { margin-top:32px; }
+
+    /* ---------- footer ---------- */
+    .foot { background:var(--navy-deep); color:var(--cream); position:relative; overflow:hidden; }
+    [data-theme="dark"] .foot { background:#081327; }
+    .foot .wrap { padding-top:clamp(64px,9vh,96px); padding-bottom:34px; position:relative; z-index:2; }
+    .foot-grid { display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:44px; align-items:start; }
+    .foot-mark { font-family:var(--serif); font-style:italic; font-weight:300; font-size:2rem; color:var(--cream); letter-spacing:.01em; }
+    .foot-jp { font-family:var(--jp); font-size:0.95rem; letter-spacing:.18em; color:var(--gold); margin-top:4px; }
+    .foot-tag { color:var(--cream-70); font-style:italic; font-family:var(--serif); margin-top:16px; max-width:34ch; }
+    .foot-col h4 { font-family:var(--sans); font-weight:500; font-size:0.82rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
+    .foot-col a,.foot-col span { display:block; color:var(--cream-70); text-decoration:none; font-size:1.02rem; margin-bottom:11px; transition:color .2s ease; }
+    .foot-col a:hover { color:var(--gold); }
+    .foot-copy { margin-top:56px; padding-top:24px; border-top:1px solid rgba(212,176,106,0.24); display:flex; justify-content:space-between;
+      flex-wrap:wrap; gap:12px; color:var(--cream-45); font-size:0.86rem; letter-spacing:0.04em; }
+    .foot-copy a { color:var(--cream-45); text-decoration:none; }
+    .foot-copy a:hover { color:var(--gold); }
+
+    .reveal { opacity:0; transform:translateY(26px); transition:opacity .9s ease, transform .9s ease; }
+    .reveal.in { opacity:1; transform:none; }
+
+    /* ---------- responsive ---------- */
+    @media (max-width:900px) { .foot-grid { grid-template-columns:1fr; gap:34px; } }
+    @media (max-width:768px) {
+      .nav-burger { display:block; }
+      .nav-links { position:absolute; top:calc(100% + 12px); right:0; flex-direction:column; align-items:stretch; gap:2px;
+        min-width:200px; padding:10px; background:rgba(11,26,51,0.97); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+        border:1px solid var(--line-gold); border-radius:14px; box-shadow:0 24px 48px -22px rgba(0,0,0,0.6);
+        opacity:0; transform:translateY(-8px) scale(.98); transform-origin:top right; pointer-events:none; transition:opacity .22s ease, transform .22s ease; }
+      .nav-links.open { opacity:1; transform:none; pointer-events:auto; }
+      .nav-links a.nl { color:var(--cream); opacity:.95; padding:11px 14px; border-radius:9px; font-size:0.9rem; letter-spacing:0.1em; }
+      .nav-links a.nl:hover, .nav-links a.nl[aria-current="page"] { color:var(--gold); background:rgba(212,176,106,0.10); opacity:1; }
+    }
+    @media (max-width:700px) { .note { grid-template-columns:1fr; gap:8px; } .note-num { display:inline; margin-left:12px; font-size:1.2rem; } }
+    @media (max-width:600px) {
+      .spark { display:none; }
+      .eyebrow { flex-direction:column; gap:8px; }
+      .pill { font-size:0.78rem; padding:13px 20px; gap:10px; max-width:100%; }
+      .foot-copy { flex-direction:column; }
+    }
+    @media (max-width:520px) {
+      .nav { padding:12px 0; }
+      .nav .logo { width:147px; height:48px; background-size:186px 140px; background-position:-22.8px -46.6px; }
+      .theme-toggle { font-size:13px; }
+      .eyebrow { font-size:0.72rem; letter-spacing:0.16em; }
+      .eyebrow::after { width:20px; }
+    }
+    @media (max-width:420px) {
+      .nav-inner { padding-inline:15px; }
+      .nav .logo { width:128px; height:42px; background-size:162px 122px; background-position:-19.8px -40.6px; }
+      .nav-actions { gap:10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior:auto; }
+      .spark { animation:none; opacity:.7; }
+      .ribbon path { animation:none; stroke-dashoffset:0; }
+      .reveal { opacity:1; transform:none; transition:none; }
+      .theme-toggle .slider, .theme-toggle .slider::before { transition:none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="atmos"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html" aria-label="Carma Studio home"></a>
+      <div class="nav-actions">
+        <div class="nav-links" id="navLinks">
+          <a class="nl" href="offering.html">Offerings</a>
+          <a class="nl" href="work.html">Work</a>
+          <a class="nl" href="animation.html">In Motion</a>
+          <a class="nl" href="journal.html" aria-current="page">Journal</a>
+        </div>
+        <label class="theme-toggle" title="Toggle light / dark mode">
+          <input type="checkbox" id="themeToggle" role="switch" aria-label="Toggle light and dark mode" />
+          <span class="slider"></span>
+        </label>
+        <button class="nav-burger" id="navBurger" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="shell">
+    <!-- Hero -->
+    <header class="hero">
+      <div class="halo" aria-hidden="true"></div>
+      <span class="spark" style="width:22px;height:22px;top:14%;left:16%;animation-delay:.2s;"></span>
+      <span class="spark" style="width:16px;height:16px;top:24%;right:16%;animation-delay:1.4s;"></span>
+      <div class="hero-inner wrap">
+        <span class="eyebrow"><span class="jp">カルマ</span> Journal</span>
+        <h1>Notes on<br /><em>intentional work</em></h1>
+        <p class="lead">A few of the beliefs that shape how the studio works — short reflections on intention, craft, and why good work has a way of coming back.</p>
+        <svg class="ribbon" viewBox="0 0 240 70" fill="none" aria-hidden="true">
+          <path pathLength="1" d="M6 35 C 60 -8, 96 60, 120 35 C 144 10, 180 78, 234 35" />
+        </svg>
+      </div>
+    </header>
+
+    <!-- Main content: the notes -->
+    <section class="band" id="notes">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow"><span class="jp">カルマ</span> Our Thinking</span>
+          <h2>Four beliefs,<br />in our own words</h2>
+        </div>
+        <div class="notes">
+          <article class="note reveal">
+            <div><span class="note-kicker">On Intention</span><span class="note-num">01</span></div>
+            <div>
+              <h3>Start with the why</h3>
+              <p>Before a single colour or line of copy, we ask what the work is really for. When the intention is clear, every later decision has something to measure against — and the result feels deliberate rather than merely decorated.</p>
+            </div>
+          </article>
+          <article class="note reveal">
+            <div><span class="note-kicker">On Craft</span><span class="note-num">02</span></div>
+            <div>
+              <h3>The details are the work</h3>
+              <p>Spacing, weight, the pause between one section and the next — these aren't finishing touches, they're the substance. Care at that level is the difference between something that looks fine and something people quietly remember.</p>
+            </div>
+          </article>
+          <article class="note reveal">
+            <div><span class="note-kicker">On Systems</span><span class="note-num">03</span></div>
+            <div>
+              <h3>Calm is a feature</h3>
+              <p>A beautiful brand still has to run. The admin, the workflows, the quiet tech behind the scenes — when those are set up with the same intention as the design, the day-to-day simply feels lighter, and nothing important slips.</p>
+            </div>
+          </article>
+          <article class="note reveal">
+            <div><span class="note-kicker">On Karma</span><span class="note-num">04</span></div>
+            <div>
+              <h3>Good work comes back</h3>
+              <p>The studio's name is a promise: put generous, careful work into the world and it has a way of returning. We build every project as if our own name depends on it — because, in a way, it does.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA back to home -->
+    <section class="band" style="padding-top:0;">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="spark" style="width:18px;height:18px;top:18%;left:14%;animation-delay:.5s;"></span>
+          <span class="spark" style="width:14px;height:14px;bottom:22%;right:16%;animation-delay:1.6s;"></span>
+          <span class="eyebrow"><span class="jp">カルマ</span> Put It Into Practice</span>
+          <h2>See the thinking<br /><em>turned into work</em></h2>
+          <p class="body">These beliefs only matter in what they produce. Head back to the studio to see the offerings, the work, and how a project takes shape.</p>
+          <a class="pill pill--gold" href="index.html">Back to the studio <span class="arw">&#8599;</span></a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <div class="foot-mark">carma studio</div>
+          <div class="foot-jp">カルマ</div>
+          <p class="foot-tag">Intentional design &amp; operations for work that naturally comes back to you.</p>
+        </div>
+        <div class="foot-col">
+          <h4>Explore</h4>
+          <a href="index.html">Home</a>
+          <a href="offering.html">Offerings</a>
+          <a href="work.html">Work</a>
+          <a href="animation.html">In Motion</a>
+          <a href="journal.html">Journal</a>
+        </div>
+        <div class="foot-col">
+          <h4>Connect</h4>
+          <a href="mailto:hello@carmastudio.com">hello@carmastudio.com</a>
+          <a href="https://instagram.com/carmastudio" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.linkedin.com/company/carmastudio" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="foot-copy">
+        <span>&copy; 2026 Carma Studio. All rights reserved.</span>
+        <a href="index.html">&#8592; Back to home</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    function applyTheme(theme) { if (theme === 'dark') root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme'); toggle.checked = theme === 'light'; }
+    (function initTheme(){ let saved=null; try { saved=localStorage.getItem('carma-theme'); } catch(e){} applyTheme(saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')); })();
+    toggle.addEventListener('change', () => { const theme = toggle.checked ? 'light' : 'dark'; try { localStorage.setItem('carma-theme', theme); } catch(e){} applyTheme(theme); });
+
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+    onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
+
+    (function () {
+      const burger = document.getElementById('navBurger');
+      const links = document.getElementById('navLinks');
+      if (!burger || !links) return;
+      const setOpen = (open) => { burger.setAttribute('aria-expanded', String(open)); burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); links.classList.toggle('open', open); };
+      burger.addEventListener('click', (e) => { e.stopPropagation(); setOpen(burger.getAttribute('aria-expanded') !== 'true'); });
+      links.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+      document.addEventListener('click', (e) => { if (links.classList.contains('open') && !links.contains(e.target) && !burger.contains(e.target)) setOpen(false); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+      window.addEventListener('resize', () => { if (window.innerWidth > 768) setOpen(false); }, { passive:true });
+    })();
+
+    const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold:0.18, rootMargin:'0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
