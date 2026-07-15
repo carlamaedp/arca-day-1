@@ -395,6 +395,38 @@
       letter-spacing: 0.08em;
     }
 
+    /* ---------- contact form ---------- */
+    .contact-form { margin: 30px auto 0; max-width: 540px; text-align: left; }
+    .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .field label {
+      font-family: var(--sans); font-weight: 500; font-size: 0.72rem;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep);
+    }
+    .field input, .field textarea {
+      font-family: var(--sans); font-size: 1rem; color: var(--ink);
+      background: var(--cream); border: 1px solid var(--line); border-radius: 10px;
+      padding: 13px 15px; width: 100%;
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .field textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+    .field input::placeholder, .field textarea::placeholder { color: var(--slate); opacity: .7; }
+    .field input:focus, .field textarea:focus {
+      outline: none; border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212,176,106,0.22); background: var(--parchment);
+    }
+    .contact-form .cf-submit { margin-top: 6px; border: 0; cursor: pointer; }
+    .cf-alt { margin-top: 20px; font-size: 0.92rem; color: var(--slate); }
+    .cf-alt a { color: var(--gold-deep); text-decoration: none; border-bottom: 1px solid var(--line-gold); }
+    .cf-alt a:hover { color: var(--navy); }
+    [data-theme="dark"] .field input, [data-theme="dark"] .field textarea { background: #0B1A33; color: #E9E5DA; border-color: var(--line); }
+    [data-theme="dark"] .field input:focus, [data-theme="dark"] .field textarea:focus { background: #0d2148; border-color: var(--gold); }
+    [data-theme="dark"] .cf-alt { color: #A7AFC6; }
+    @media (max-width: 560px) {
+      .cf-row { grid-template-columns: 1fr; gap: 0; }
+      .contact-form .cf-submit { width: 100%; justify-content: center; }
+    }
+
     /* ---------- offerings callout ---------- */
     .offer {
       background: var(--parchment);
@@ -825,9 +857,26 @@
           <span class="spark" style="width:20px;height:20px;top:18%;left:14%;animation-delay:.5s;"></span>
           <span class="spark" style="width:15px;height:15px;bottom:22%;right:16%;animation-delay:1.6s;"></span>
           <span class="eyebrow">Let's Begin</span>
-          <h2>Let's make something<br />that <em>comes back to you.</em></h2>
-          <p class="body">Tell us what you're building. We'll bring the intention, the craft, and the care.</p>
-          <a class="pill pill--gold" href="mailto:hello@carmastudio.com">hello@carmastudio.com <span class="arw">&#8599;</span></a>
+          <h2>Start a <em>project</em></h2>
+          <p class="body">Tell us what you're building — a name, an email, and a few words is all we need to start.</p>
+          <form class="contact-form" action="" method="post">
+            <div class="cf-row">
+              <div class="field">
+                <label for="cf-name">Name</label>
+                <input id="cf-name" name="name" type="text" required autocomplete="name" placeholder="Your name" />
+              </div>
+              <div class="field">
+                <label for="cf-email">Email</label>
+                <input id="cf-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" rows="4" placeholder="Tell us what you're building&hellip;"></textarea>
+            </div>
+            <button type="submit" class="pill pill--gold cf-submit">Send message <span class="arw">&#8599;</span></button>
+          </form>
+          <p class="cf-alt">Prefer email? <a href="mailto:hello@carmastudio.com">hello@carmastudio.com</a></p>
         </div>
       </div>
     </section>
