@@ -194,7 +194,8 @@
     .video-hero {
       position: relative; min-height: 92vh; margin-top: -92px;
       display: flex; align-items: flex-end;
-      padding: 120px 0 clamp(56px, 10vh, 110px); overflow: hidden; background: #0B1A33;
+      padding: 120px 0 clamp(56px, 10vh, 110px); overflow: hidden;
+      background: #0B1A33 url("images/hero-background.png") center / cover no-repeat;
     }
     .video-bg { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
     .video-hero .scrim {
@@ -309,6 +310,36 @@
     .moment h3 { font-family: var(--serif); font-weight: 400; font-size: 1.4rem; color: var(--cream); line-height: 1.15; }
     .moment p { color: var(--cream-70); font-size: 1rem; margin-top: 4px; line-height: 1.6; }
 
+    /* ---------- offerings header + illustration ---------- */
+    .offer-head { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+    .offer-art { position: relative; border-radius: 22px; overflow: hidden; border: 1px solid var(--line-gold); box-shadow: 0 30px 60px -32px rgba(0,0,0,0.45), 0 0 44px -8px rgba(212,176,106,0.22); }
+    .offer-art img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    /* ---------- selected work gallery ---------- */
+    .work-grid { margin-top: clamp(40px, 6vw, 60px); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(22px, 3vw, 36px); }
+    .work-card { display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; background: var(--parchment); border: 1px solid var(--line); box-shadow: 0 24px 50px -34px rgba(20,43,82,0.45); transition: transform .3s ease, box-shadow .3s ease; }
+    [data-theme="dark"] .work-card { background: #10224A; }
+    .work-card:hover { transform: translateY(-5px); box-shadow: 0 34px 62px -30px rgba(20,43,82,0.5), 0 0 40px -12px rgba(212,176,106,0.3); }
+    .work-img { aspect-ratio: 3 / 2; overflow: hidden; }
+    .work-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .work-card figcaption { padding: 15px 18px 18px; }
+    .work-tag { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.14rem; color: var(--navy); line-height: 1.2; }
+    [data-theme="dark"] .work-tag { color: #F5F1E6; }
+    .work-cap { display: block; margin-top: 5px; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.03em; color: var(--slate); }
+    [data-theme="dark"] .work-cap { color: #A7AFC6; }
+
+    /* ---------- process ---------- */
+    .process-art { margin: clamp(30px, 5vw, 46px) auto 0; max-width: 900px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line-gold); box-shadow: 0 30px 60px -34px rgba(0,0,0,0.5); }
+    .process-art img { display: block; width: 100%; height: auto; }
+    .steps { list-style: none; margin: clamp(32px, 5vw, 52px) 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 36px); }
+    .steps li { border-top: 1px solid var(--navy); padding-top: 16px; }
+    [data-theme="dark"] .steps li { border-top-color: rgba(224,191,128,0.4); }
+    .step-n { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 1.7rem; color: var(--gold-deep); line-height: 1; }
+    .steps h3 { font-family: var(--serif); font-weight: 400; font-size: 1.28rem; color: var(--navy); margin: 10px 0 6px; }
+    [data-theme="dark"] .steps h3 { color: #F5F1E6; }
+    .steps p { color: var(--slate); font-size: 0.96rem; line-height: 1.55; }
+    [data-theme="dark"] .steps p { color: #A7AFC6; }
+
     /* ---------- CTA ---------- */
     .cta-card {
       position: relative; background: var(--parchment); border: 1px solid var(--line-gold);
@@ -369,6 +400,10 @@
       .features { grid-template-columns: 1fr 1fr; }
       .callouts { grid-template-columns: 1fr; gap: 32px; }
       .foot-grid { grid-template-columns: 1fr; gap: 34px; }
+      .offer-head { grid-template-columns: 1fr; }
+      .offer-art { max-width: 460px; }
+      .work-grid { grid-template-columns: 1fr 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
       .spark { display: none; }
@@ -394,6 +429,8 @@
     @media (max-width: 560px) {
       .features { grid-template-columns: 1fr; }
       .foot-copy { flex-direction: column; }
+      .work-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
     }
     @media (max-width: 520px) {
       .nav { padding: 12px 0; }
@@ -426,6 +463,7 @@
       <div class="nav-links">
         <a class="nl" href="index.html">Home</a>
         <a class="nl" href="#offerings">Offerings</a>
+        <a class="nl" href="#work">Work</a>
         <label class="theme-toggle" title="Toggle light / dark mode">
           <input type="checkbox" id="themeToggle" role="switch" aria-label="Toggle light and dark mode" />
           <span class="slider"></span>
@@ -436,7 +474,7 @@
 
   <!-- Video hero -->
   <header class="video-hero">
-    <video class="video-bg" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <video class="video-bg" autoplay muted loop playsinline preload="auto" poster="images/hero-background.png" aria-hidden="true">
       <source src="video_background.mp4" type="video/mp4" />
     </video>
     <div class="scrim"></div>
@@ -471,10 +509,15 @@
   <section class="band" id="offerings">
     <span class="spark" style="width:16px;height:16px;top:12%;right:10%;animation-delay:.6s;"></span>
     <div class="wrap">
-      <div class="sec-head reveal">
-        <span class="eyebrow"><span class="jp">カルマ</span> What I Offer</span>
-        <h2>Two crafts,<br />held to one standard</h2>
-        <p class="body">Whether you need something beautiful to show the world or something dependable to run behind it, the level of care stays the same.</p>
+      <div class="offer-head">
+        <div class="sec-head reveal">
+          <span class="eyebrow"><span class="jp">カルマ</span> What I Offer</span>
+          <h2>Two crafts,<br />held to one standard</h2>
+          <p class="body">Whether you need something beautiful to show the world or something dependable to run behind it, the level of care stays the same.</p>
+        </div>
+        <figure class="offer-art reveal">
+          <img src="images/section-two-crafts.png" alt="Abstract gold illustration on deep navy: a flowing brushstroke meeting a precise geometric grid, symbolising Carma Studio's two crafts — visual design and dependable operations — held in balance." />
+        </figure>
       </div>
       <div class="features">
         <div class="feature reveal"><div class="fi">01</div><h3>Brand identity &amp; strategy</h3><p>A considered visual language that makes your business unmistakably itself.</p></div>
@@ -487,6 +530,40 @@
   </section>
 
   <div class="wrap"><div class="connector" data-connector><svg viewBox="0 0 44 84" aria-hidden="true"><path pathLength="1" d="M22 2 C 6 22, 38 42, 22 62 C 14 74, 22 78, 22 82" /></svg></div></div>
+
+  <!-- Selected work -->
+  <section class="band" id="work">
+    <span class="spark" style="width:15px;height:15px;top:12%;right:9%;animation-delay:.9s;"></span>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="jp">カルマ</span> Selected Work</span>
+        <h2>A few things<br />we've made</h2>
+        <p class="body">Representative pieces across the studio's crafts — from the first impression a brand makes to the quiet systems that keep it running.</p>
+      </div>
+      <div class="work-grid">
+        <figure class="work-card reveal">
+          <div class="work-img"><img src="images/work-brand-identity.png" alt="Flat lay of a premium brand identity kit on cream — navy business cards and folded stationery with a gold-foil botanical mark, a wax seal, and a navy-gold-cream colour swatch." /></div>
+          <figcaption><span class="work-tag">Brand identity &amp; strategy</span><span class="work-cap">Stationery &amp; gold-foil identity system</span></figcaption>
+        </figure>
+        <figure class="work-card reveal">
+          <div class="work-img"><img src="images/work-web-design.png" alt="A minimal navy-and-gold editorial website layout shown on a laptop and phone standing on a cream desk." /></div>
+          <figcaption><span class="work-tag">Web &amp; digital design</span><span class="work-cap">Responsive editorial site design</span></figcaption>
+        </figure>
+        <figure class="work-card reveal">
+          <div class="work-img"><img src="images/work-social-systems.png" alt="A cohesive set of social-media template tiles fanned out on cream, unified by a navy, gold and cream visual system." /></div>
+          <figcaption><span class="work-tag">Social &amp; marketing systems</span><span class="work-cap">On-brand social template toolkit</span></figcaption>
+        </figure>
+        <figure class="work-card reveal">
+          <div class="work-img"><img src="images/work-admin-ops.png" alt="A calm, organised desk: a laptop showing a clean dashboard, navy binders with gold labels, a planner, and a cup of tea — the operations behind the work." /></div>
+          <figcaption><span class="work-tag">Admin &amp; operations</span><span class="work-cap">Organised back-office systems</span></figcaption>
+        </figure>
+        <figure class="work-card reveal">
+          <div class="work-img"><img src="images/work-workflow-tech.png" alt="A refined tech setup on a cream desk — a laptop showing a clean project dashboard beside a phone with subtle notifications and navy-and-gold accents." /></div>
+          <figcaption><span class="work-tag">Workflow, tech &amp; support</span><span class="work-cap">Dashboards &amp; ongoing support tooling</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
 
   <!-- Video callouts -->
   <section class="band band--navy" id="in-motion">
@@ -516,6 +593,28 @@
           <div class="moment reveal"><div class="mi">03</div><div><h3>Everything runs quietly</h3><p>The result: work that looks the part and keeps running — so you don't have to think about it.</p></div></div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="connector" data-connector><svg viewBox="0 0 44 84" aria-hidden="true"><path pathLength="1" d="M22 2 C 6 22, 38 42, 22 62 C 14 74, 22 78, 22 82" /></svg></div></div>
+
+  <!-- Process -->
+  <section class="band" id="process">
+    <span class="spark" style="width:16px;height:16px;top:14%;left:9%;animation-delay:.7s;"></span>
+    <div class="wrap">
+      <div class="sec-head reveal" style="max-width:none; text-align:center; margin-inline:auto;">
+        <span class="eyebrow" style="justify-content:center;"><span class="jp">カルマ</span> How We Work</span>
+        <h2>A calm path,<br />start to finish</h2>
+      </div>
+      <figure class="process-art reveal">
+        <img src="images/section-process.png" alt="Minimal gold line illustration on cream: a single flowing path winds from a navy mountain up to a lone bonsai tree beneath a rising sun, passing small waypoint markers — Carma Studio's Discover, Design, Build and Deliver process." />
+      </figure>
+      <ol class="steps reveal">
+        <li><span class="step-n">01</span><h3>Discover</h3><p>We start with the why — your goals, your audience, and the shape of the work.</p></li>
+        <li><span class="step-n">02</span><h3>Design</h3><p>Ideas become a considered visual language and a plan you can actually see.</p></li>
+        <li><span class="step-n">03</span><h3>Build</h3><p>Design and systems come together, each made with the same attention to detail.</p></li>
+        <li><span class="step-n">04</span><h3>Deliver</h3><p>Everything ships polished — and keeps running quietly long after launch.</p></li>
+      </ol>
     </div>
   </section>
 
