@@ -12,7 +12,13 @@ desktop.ini
 .env.*
 !.env.example
 
+# Dependencies
+node_modules/
+
 # Logs / temp
 *.log
 
 .vercel
+
+# Local-only reference snapshot — never commit or deploy
+old-version/

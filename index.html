@@ -416,6 +416,11 @@
       box-shadow: 0 0 0 3px rgba(212,176,106,0.22); background: var(--parchment);
     }
     .contact-form .cf-submit { margin-top: 6px; border: 0; cursor: pointer; }
+    .cf-submit:disabled { opacity: .6; cursor: default; }
+    .cf-status { margin-top: 16px; font-size: 0.92rem; font-family: var(--sans); }
+    .cf-status--ok { color: var(--gold-deep); }
+    .cf-status--err { color: #B4402F; }
+    [data-theme="dark"] .cf-status--err { color: #F0857A; }
     .cf-alt { margin-top: 20px; font-size: 0.92rem; color: var(--slate); }
     .cf-alt a { color: var(--gold-deep); text-decoration: none; border-bottom: 1px solid var(--line-gold); }
     .cf-alt a:hover { color: var(--navy); }
@@ -859,7 +864,7 @@
           <span class="eyebrow">Let's Begin</span>
           <h2>Start a <em>project</em></h2>
           <p class="body">Tell us what you're building — a name, an email, and a few words is all we need to start.</p>
-          <form class="contact-form" action="" method="post">
+          <form class="contact-form" id="contactForm" action="/api/contact" method="post">
             <div class="cf-row">
               <div class="field">
                 <label for="cf-name">Name</label>
@@ -875,6 +880,7 @@
               <textarea id="cf-message" name="message" rows="4" placeholder="Tell us what you're building&hellip;"></textarea>
             </div>
             <button type="submit" class="pill pill--gold cf-submit">Send message <span class="arw">&#8599;</span></button>
+            <p class="cf-status" id="cfStatus" role="status" aria-live="polite" hidden></p>
           </form>
           <p class="cf-alt">Prefer email? <a href="mailto:hello@carmastudio.com">hello@carmastudio.com</a></p>
         </div>
@@ -968,6 +974,49 @@
     }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
 
     document.querySelectorAll('.reveal, [data-connector]').forEach((el) => io.observe(el));
+
+    // Contact form — POST to the /api/contact serverless function
+    (function () {
+      const form = document.getElementById('contactForm');
+      const status = document.getElementById('cfStatus');
+      if (!form) return;
+      const btn = form.querySelector('.cf-submit');
+      const showStatus = (msg, ok) => {
+        if (!status) return;
+        status.textContent = msg;
+        status.hidden = false;
+        status.classList.toggle('cf-status--ok', ok);
+        status.classList.toggle('cf-status--err', !ok);
+      };
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const payload = {
+          name: form.name.value.trim(),
+          email: form.email.value.trim(),
+          message: form.message.value.trim(),
+        };
+        if (btn) btn.disabled = true;
+        showStatus('Sending…', true);
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (res.ok && data.ok) {
+            form.reset();
+            showStatus('Thanks — your message is on its way.', true);
+          } else {
+            showStatus(data.error || 'Something went wrong. Please try again.', false);
+          }
+        } catch (err) {
+          showStatus('Network error. Please try again.', false);
+        } finally {
+          if (btn) btn.disabled = false;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
