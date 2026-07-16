@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Submissions — Carma Studio (Internal)</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Jost:wght@300;400;500&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet" />
+
+  <script>
+    /* Apply saved / preferred theme before paint to avoid a flash — same key as the site */
+    (function () {
+      try {
+        var saved = localStorage.getItem('carma-theme');
+        var dark = saved ? saved === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    :root {
+      --navy:      #142B52;
+      --navy-deep: #0E1F3D;
+      --gold:      #D4B06A;
+      --gold-deep: #A9843F;
+      --cream:     #F8F6EE;
+      --parchment: #FDFBF4;
+      --ink:       #1E2439;
+      --slate:     #5C6379;
+      --line:      rgba(20,43,82,0.12);
+      --line-gold: rgba(212,176,106,0.42);
+      --serif: "Fraunces", Georgia, "Times New Roman", serif;
+      --sans:  "Jost", "Segoe UI", Helvetica, Arial, sans-serif;
+      --jp:    "Noto Serif JP", "Fraunces", serif;
+    }
+    :root[data-theme="dark"] {
+      --gold-deep: #E0BF80;
+      --line: rgba(224,191,128,0.16);
+      --line-gold: rgba(224,191,128,0.42);
+      --ink: #E9E5DA;
+      --slate: #A7AFC6;
+      --cream: #0B1A33;
+      --parchment: #0F2445;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 106.25%; }
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--ink);
+      font-size: 1rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      transition: background .5s ease, color .5s ease;
+      min-height: 100vh;
+    }
+
+    .atmos {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(46vw 40vw at 88% -8%, rgba(212,176,106,0.16), transparent 60%),
+        radial-gradient(52vw 44vw at 4% 6%, rgba(20,43,82,0.06), transparent 62%);
+    }
+    [data-theme="dark"] .atmos {
+      background:
+        radial-gradient(46vw 40vw at 88% -8%, rgba(212,176,106,0.16), transparent 60%),
+        radial-gradient(52vw 44vw at 4% 6%, rgba(96,126,196,0.12), transparent 62%);
+    }
+
+    .shell { position: relative; z-index: 1; }
+    .wrap {
+      width: 100%; max-width: 1120px; margin-inline: auto;
+      padding: clamp(28px, 5vw, 56px) clamp(20px, 5vw, 60px) 80px;
+    }
+
+    /* ---------- header ---------- */
+    .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .eyebrow {
+      font-family: var(--sans); font-weight: 500; font-size: 0.74rem;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-deep);
+      display: inline-flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    }
+    .eyebrow .jp { font-family: var(--jp); font-size: 0.85rem; letter-spacing: 0.14em; text-transform: none; }
+    h1 { font-family: var(--serif); font-weight: 400; color: var(--navy); font-size: clamp(2rem, 4vw, 2.9rem); line-height: 1.1; }
+    [data-theme="dark"] h1 { color: #F5F1E6; }
+    .count { font-family: var(--serif); font-size: 1.05rem; color: var(--slate); margin-top: 8px; }
+    .count strong { font-style: italic; color: var(--gold-deep); font-weight: 500; }
+
+    .theme-btn {
+      font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.08em;
+      background: transparent; color: var(--slate); border: 1px solid var(--line);
+      border-radius: 999px; padding: 8px 16px; cursor: pointer; transition: all .2s ease;
+    }
+    .theme-btn:hover { border-color: var(--line-gold); color: var(--gold-deep); }
+
+    /* ---------- controls ---------- */
+    .controls { margin: 30px 0 18px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+    .search {
+      font-family: var(--sans); font-size: 0.98rem; color: var(--ink);
+      background: var(--parchment); border: 1px solid var(--line); border-radius: 10px;
+      padding: 12px 16px; width: min(360px, 100%);
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .search::placeholder { color: var(--slate); opacity: .75; }
+    .search:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,176,106,0.20); }
+    .matches { font-size: 0.85rem; color: var(--slate); }
+
+    /* ---------- table ---------- */
+    .table-card {
+      background: var(--parchment); border: 1px solid var(--line);
+      border-radius: 14px; overflow: hidden;
+    }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    thead th {
+      text-align: left; font-family: var(--sans); font-weight: 500;
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold-deep); padding: 16px 20px; white-space: nowrap;
+      border-bottom: 1px solid var(--line); background: rgba(212,176,106,0.06);
+    }
+    tbody td { padding: 15px 20px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink); }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:hover td { background: rgba(212,176,106,0.05); }
+    .c-date { white-space: nowrap; color: var(--slate); font-size: 0.88rem; }
+    .c-name { font-weight: 500; white-space: nowrap; }
+    .c-email a { color: var(--gold-deep); text-decoration: none; border-bottom: 1px solid var(--line-gold); }
+    .c-email a:hover { color: var(--navy); }
+    [data-theme="dark"] .c-email a:hover { color: #F5F1E6; }
+    .c-message { color: var(--slate); max-width: 460px; }
+    .c-message.empty { opacity: .5; font-style: italic; }
+
+    .state { padding: 44px 20px; text-align: center; color: var(--slate); font-family: var(--serif); font-size: 1.1rem; }
+    .state.error { color: #B4402F; }
+    [data-theme="dark"] .state.error { color: #F0857A; }
+
+    @media (max-width: 620px) {
+      .c-message { max-width: 200px; }
+      thead th, tbody td { padding: 12px 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="atmos"></div>
+  <div class="shell">
+    <div class="wrap">
+      <header class="head">
+        <div>
+          <span class="eyebrow">Internal <span class="jp">カルマ</span></span>
+          <h1>Submissions</h1>
+          <p class="count" id="count">Loading…</p>
+        </div>
+        <button class="theme-btn" id="themeBtn" type="button">Toggle theme</button>
+      </header>
+
+      <div class="controls">
+        <input class="search" id="search" type="search" placeholder="Search by name or email…" autocomplete="off" />
+        <span class="matches" id="matches"></span>
+      </div>
+
+      <div class="table-card">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+              <tr><td colspan="4"><div class="state" id="state">Loading submissions…</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    const els = {
+      tbody: document.getElementById('tbody'),
+      count: document.getElementById('count'),
+      matches: document.getElementById('matches'),
+      search: document.getElementById('search'),
+    };
+
+    // Theme toggle — shares the site's localStorage key
+    document.getElementById('themeBtn').addEventListener('click', () => {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const next = dark ? 'light' : 'dark';
+      if (next === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      else document.documentElement.removeAttribute('data-theme');
+      try { localStorage.setItem('carma-theme', next); } catch (e) {}
+    });
+
+    let allRows = [];
+
+    const fmtDate = (iso) => {
+      if (!iso) return '—';
+      const d = new Date(iso);
+      if (isNaN(d)) return iso;
+      return d.toLocaleString(undefined, {
+        year: 'numeric', month: 'short', day: 'numeric',
+        hour: 'numeric', minute: '2-digit',
+      });
+    };
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    const showState = (msg, isError) =>
+      els.tbody.innerHTML =
+        `<tr><td colspan="4"><div class="state${isError ? ' error' : ''}">${esc(msg)}</div></td></tr>`;
+
+    function render(rows) {
+      if (!rows.length) {
+        showState(allRows.length ? 'No submissions match your search.' : 'No submissions yet.', false);
+        return;
+      }
+      els.tbody.innerHTML = rows.map((r) => {
+        const msg = (r.message || '').trim();
+        return `<tr>
+          <td class="c-date">${esc(fmtDate(r.created_at))}</td>
+          <td class="c-name">${esc(r.name)}</td>
+          <td class="c-email"><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></td>
+          <td class="c-message${msg ? '' : ' empty'}">${msg ? esc(msg) : 'No message'}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    function applyFilter() {
+      const q = els.search.value.trim().toLowerCase();
+      const rows = q
+        ? allRows.filter((r) =>
+            (r.name || '').toLowerCase().includes(q) ||
+            (r.email || '').toLowerCase().includes(q))
+        : allRows;
+      render(rows);
+      els.matches.textContent = q ? `${rows.length} of ${allRows.length} shown` : '';
+    }
+
+    els.search.addEventListener('input', applyFilter);
+
+    async function load() {
+      try {
+        // Read Supabase URL + anon key from the server (sourced from Doppler env vars).
+        const cfg = await fetch('/api/config').then((r) => r.json());
+        if (!cfg.ok) throw new Error(cfg.error || 'Could not load configuration.');
+
+        const supabase = createClient(cfg.supabaseUrl, cfg.supabaseAnonKey);
+        const { data, error } = await supabase
+          .from('signups')
+          .select('created_at, name, email, message')
+          .order('created_at', { ascending: false }); // newest first
+
+        if (error) throw error;
+
+        allRows = data || [];
+        els.count.innerHTML = `<strong>${allRows.length}</strong> total submission${allRows.length === 1 ? '' : 's'}`;
+        applyFilter();
+      } catch (err) {
+        console.error(err);
+        els.count.textContent = '';
+        showState('Could not load submissions. ' + (err.message || ''), true);
+      }
+    }
+
+    load();
+  </script>
+</body>
+</html>
