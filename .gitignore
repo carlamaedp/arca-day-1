@@ -18,6 +18,12 @@ node_modules/
 # Logs / temp
 *.log
 
+# Playwright generated output
+test-results/
+playwright-report/
+tests/screenshots/
+tests/qa-report.md
+
 .vercel
 
 # Local-only reference snapshot — never commit or deploy
