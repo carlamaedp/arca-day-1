@@ -4,6 +4,7 @@
   "private": true,
   "description": "Carma Studio site with a contact form backed by Supabase.",
   "dependencies": {
-    "@supabase/supabase-js": "^2.110.7"
+    "@supabase/supabase-js": "^2.110.7",
+    "resend": "^6.17.2"
   }
 }
